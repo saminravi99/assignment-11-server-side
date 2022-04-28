@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const port = process.env.PORT || 5000;
 
@@ -22,6 +23,11 @@ const run = async () => {
     console.log("Connected to MongoDB");
     const db = client.db("booksDb");
     const booksCollection = db.collection("booksCollection");
+
+    // API to Run Server
+    app.get("/", async (req, res) => {
+        res.send("Warehouse Server Running");
+    });
 
     // API to get List of All Books
 
