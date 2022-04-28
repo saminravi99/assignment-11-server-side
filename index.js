@@ -26,7 +26,7 @@ const run = async () => {
 
     // API to Run Server
     app.get("/", async (req, res) => {
-        res.send("Warehouse Server Running");
+      res.send("Warehouse Server Running");
     });
 
     // API to get List of All Books
