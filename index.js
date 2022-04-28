@@ -47,6 +47,18 @@ const run = async () => {
       await booksCollection.insertOne(book);
       res.send(book);
     });
+
+    // API to Update a Book
+
+    app.put("/books/:id", async (req, res) => {
+      const id = req.params.id;
+      const book = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const option = { upsert: true };
+      const updateDoc = { $set: book };
+      const result = await booksCollection.updateOne(filter, updateDoc, option);
+      res.send(result);
+    });
   } finally {
     // client.close();
   }
