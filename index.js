@@ -59,6 +59,15 @@ const run = async () => {
       const result = await booksCollection.updateOne(filter, updateDoc, option);
       res.send(result);
     });
+
+    // API to Delete a book
+
+    app.delete("/books/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await booksCollection.deleteOne(filter);
+      res.send(result);
+    });
   } finally {
     // client.close();
   }
