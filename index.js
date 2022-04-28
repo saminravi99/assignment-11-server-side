@@ -31,7 +31,15 @@ const run = async () => {
       res.send(books);
     });
 
-   
+    // API to get single Book by Id
+
+    app.get("/books/:id", async (req, res) => {
+      const bookId = req.params.id;
+      const query = { _id: ObjectId(bookId) };
+      const book = await booksCollection.findOne(query);
+      res.send(book);
+    });
+    
   } finally {
     // client.close();
   }
