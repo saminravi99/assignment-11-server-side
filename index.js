@@ -39,7 +39,14 @@ const run = async () => {
       const book = await booksCollection.findOne(query);
       res.send(book);
     });
-    
+
+    // API to Post a Book
+
+    app.post("/book", async (req, res) => {
+      const book = req.body;
+      await booksCollection.insertOne(book);
+      res.send(book);
+    });
   } finally {
     // client.close();
   }
