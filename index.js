@@ -74,6 +74,15 @@ const run = async () => {
       res.send(user);
     });
 
+    //API to get single User Info who is posting the book
+
+    app.get("/users/:id", async (req, res) => {
+      const userId = req.params.id;
+      const query = { _id: ObjectId(userId) };
+      const user = await userAddItemCollection.findOne(query);
+      res.send(user);
+    });
+
 
     //API to get User Info who is posting the book
 
