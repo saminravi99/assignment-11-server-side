@@ -7,11 +7,11 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
-const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
-}
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
 app.use(cors(corsOptions)) // Use this after the variable declaration
 
@@ -111,7 +111,7 @@ const run = async () => {
        res.send(result);
     });
 
-    
+
     //API to post user info who update Stock of a Book
 
     app.post("/userStockUpdate", async (req, res) => {
