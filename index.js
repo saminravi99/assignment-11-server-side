@@ -66,15 +66,32 @@ const run = async () => {
       res.send(user);
     });
 
+    //API to get all User Info who is posting the book
+
+    app.get("/user", async (req, res) => {
+      const query = {};
+      const user = await userAddItemCollection.find(query).toArray();
+      res.send(user);
+    });
+    
+
     //API to get User Info who is posting the book
 
     app.get("/user", async (req, res) => {
-          
-       const email = req.query.email;
-       const query = { email: email };
-       console.log(query);
+      const email = req.query.email;
+      const query = { email: email };
+      console.log(query);
       const user = await userAddItemCollection.find(query).toArray();
       res.send(user);
+    });
+
+    //API to delete user info who is posting the book
+
+    app.delete("/user/:id", async (req, res) => {
+       const id = req.params.id;
+       const filter = { _id: new ObjectId(id) };
+       const result = await booksCollection.deleteOne(filter);
+       res.send(result);
     });
 
     //API to post user info who update Stock of a Book
@@ -88,7 +105,6 @@ const run = async () => {
     //API to get user info who update Stock of a Book
 
     app.get("/userStockUpdate", async (req, res) => {
-           
       const user = await userStockUpdateCollection.find(query).toArray();
       res.send(user);
     });
@@ -112,7 +128,6 @@ const run = async () => {
       const filter = { _id: new ObjectId(id) };
       const result = await booksCollection.deleteOne(filter);
       res.send(result);
-      
     });
   } finally {
     // client.close();
