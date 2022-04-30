@@ -117,7 +117,8 @@ const run = async () => {
       const user = await userStockUpdateCollection.find(query).toArray();
       res.send(user);
     });
-
+ 
+    
     // API to Update a Book
 
     app.put("/books/:id", async (req, res) => {
