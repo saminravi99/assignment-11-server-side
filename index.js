@@ -97,7 +97,7 @@ const run = async () => {
     app.get("/user", async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
-      console.log(query);
+      // console.log(query);
       const user = await userAddItemCollection.find(query).toArray();
       res.send(user);
     });
@@ -115,8 +115,10 @@ const run = async () => {
 
     app.put("/users/:id", async (req, res) => {
       const id = req.params.id;
+      console.log(id);
       const filter = { _id: ObjectId(id) };
       const user = req.body;
+      console.log(user);
       const updateDoc = { $set: user };
       const options = { upsert: true };
       const result = await userAddItemCollection.updateOne(filter, updateDoc, options);
@@ -145,9 +147,9 @@ const run = async () => {
 
     app.put("/inventory/:id", async (req, res) => {
       const id = req.params.id;
-      console.log(id);
+      // console.log(id);
       const book = req.body;
-      console.log(book);
+      // console.log(book);
       const filter = { _id: ObjectId(id) };
       const option = { upsert: true };
       const updateDoc = { $set: book };
