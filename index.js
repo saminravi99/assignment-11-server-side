@@ -112,6 +112,7 @@ const run = async () => {
       const filter = { _id: new ObjectId(id) };
       const result = await booksCollection.deleteOne(filter);
       res.send(result);
+      
     });
   } finally {
     // client.close();
