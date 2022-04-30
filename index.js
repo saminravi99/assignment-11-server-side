@@ -69,7 +69,10 @@ const run = async () => {
     //API to get User Info who is posting the book
 
     app.get("/user", async (req, res) => {
-      const query = {};
+          
+       const email = req.query.email;
+       const query = { email: email };
+       console.log(query);
       const user = await userAddItemCollection.find(query).toArray();
       res.send(user);
     });
@@ -85,7 +88,7 @@ const run = async () => {
     //API to get user info who update Stock of a Book
 
     app.get("/userStockUpdate", async (req, res) => {
-      const query = {};
+           
       const user = await userStockUpdateCollection.find(query).toArray();
       res.send(user);
     });
