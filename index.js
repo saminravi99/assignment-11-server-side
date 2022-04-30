@@ -98,8 +98,8 @@ const run = async () => {
 
     app.delete("/users/:id", async (req, res) => {
        const id = req.params.id;
-       const filter = { _id: new ObjectId(id) };
-       const result = await booksCollection.deleteOne(filter);
+       const filter = { _id: ObjectId(id) };
+       const result = await userAddItemCollection.deleteOne(filter);
        res.send(result);
     });
 
@@ -134,7 +134,7 @@ const run = async () => {
 
     app.delete("/books/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: new ObjectId(id) };
+      const filter = { _id: ObjectId(id) };
       const result = await booksCollection.deleteOne(filter);
       res.send(result);
     });
