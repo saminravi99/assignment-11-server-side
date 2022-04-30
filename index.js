@@ -13,7 +13,7 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions)) // Use this after the variable declaration
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
 // app.use(cors());
 app.use(express.json());
@@ -35,6 +35,7 @@ const run = async () => {
     const userStockUpdateCollection = db.collection(
       "userStockUpdateCollection"
     );
+    const blogsCollection = db.collection("blogs");
 
     // API to Run Server
     app.get("/", async (req, res) => {
@@ -91,7 +92,6 @@ const run = async () => {
       res.send(user);
     });
 
-
     //API to get User Info who is posting the book
 
     app.get("/user", async (req, res) => {
@@ -105,10 +105,10 @@ const run = async () => {
     //API to delete user info who is posting the book
 
     app.delete("/users/:id", async (req, res) => {
-       const id = req.params.id;
-       const filter = { _id: ObjectId(id) };
-       const result = await userAddItemCollection.deleteOne(filter);
-       res.send(result);
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id) };
+      const result = await userAddItemCollection.deleteOne(filter);
+      res.send(result);
     });
 
     //API to update user info who is posting/updating stock of the book
@@ -121,10 +121,13 @@ const run = async () => {
       console.log(user);
       const updateDoc = { $set: user };
       const options = { upsert: true };
-      const result = await userAddItemCollection.updateOne(filter, updateDoc, options);
+      const result = await userAddItemCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
       res.send(result);
     });
-
 
     //API to post user info who update Stock of a Book
 
@@ -140,8 +143,6 @@ const run = async () => {
       const user = await userStockUpdateCollection.find(query).toArray();
       res.send(user);
     });
- 
-
 
     // API to Update a Book
 
@@ -164,6 +165,14 @@ const run = async () => {
       const filter = { _id: ObjectId(id) };
       const result = await booksCollection.deleteOne(filter);
       res.send(result);
+    });
+
+    //API to get blogs
+
+    app.get("/blogs", async (req, res) => {
+      const query = {};
+      const blogs = await blogsCollection.find(query).toArray();
+      res.send(blogs);
     });
   } finally {
     // client.close();
