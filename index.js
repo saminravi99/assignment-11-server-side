@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hb9h8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -125,9 +125,9 @@ const run = async () => {
     app.put("/books/:id", async (req, res) => {
       const id = req.params.id;
       const book = req.body;
-      const filter = { _id: new ObjectId(id) };
+      const filter = { _id: ObjectId(id) };
       const option = { upsert: true };
-      const updateDoc = { $set: book };
+      const updateDoc = { $set: {...book} };
       const result = await booksCollection.updateOne(filter, updateDoc, option);
       res.send(result);
     });
