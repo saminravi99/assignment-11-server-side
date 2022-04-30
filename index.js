@@ -96,7 +96,7 @@ const run = async () => {
 
     //API to delete user info who is posting the book
 
-    app.delete("/user/:id", async (req, res) => {
+    app.delete("/users/:id", async (req, res) => {
        const id = req.params.id;
        const filter = { _id: new ObjectId(id) };
        const result = await booksCollection.deleteOne(filter);
