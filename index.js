@@ -111,6 +111,16 @@ const run = async () => {
        res.send(result);
     });
 
+    //API to update user info who is posting/updating stock of the book
+
+    app.put("/inventory/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id) };
+      const user = req.body;
+      const result = await userAddItemCollection.updateOne(filter, user);
+      res.send(result);
+    });
+
 
     //API to post user info who update Stock of a Book
 
