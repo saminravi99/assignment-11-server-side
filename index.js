@@ -117,7 +117,9 @@ const run = async () => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
       const user = req.body;
-      const result = await userAddItemCollection.updateOne(filter, user);
+      const updateDoc = { $set: user };
+      const options = { upsert: true };
+      const result = await userAddItemCollection.updateOne(filter, updateDoc, options);
       res.send(result);
     });
 
