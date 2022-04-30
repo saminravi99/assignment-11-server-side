@@ -23,6 +23,10 @@ const run = async () => {
     console.log("Connected to MongoDB");
     const db = client.db("booksDb");
     const booksCollection = db.collection("booksCollection");
+    const userAddItemCollection = db.collection("userAddItemCollection");
+    const userStockUpdateCollection = db.collection(
+      "userStockUpdateCollection"
+    );
 
     // API to Run Server
     app.get("/", async (req, res) => {
@@ -52,6 +56,38 @@ const run = async () => {
       const book = req.body;
       await booksCollection.insertOne(book);
       res.send(book);
+    });
+
+    //API to post User Info who is posting the book
+
+    app.post("/user", async (req, res) => {
+      const user = req.body;
+      await userAddItemCollection.insertOne(user);
+      res.send(user);
+    });
+
+    //API to get User Info who is posting the book
+
+    app.get("/user", async (req, res) => {
+      const query = {};
+      const user = await userAddItemCollection.find(query).toArray();
+      res.send(user);
+    });
+
+    //API to post user info who update Stock of a Book
+
+    app.post("/userStockUpdate", async (req, res) => {
+      const user = req.body;
+      await userStockUpdateCollection.insertOne(user);
+      res.send(user);
+    });
+
+    //API to get user info who update Stock of a Book
+
+    app.get("/userStockUpdate", async (req, res) => {
+      const query = {};
+      const user = await userStockUpdateCollection.find(query).toArray();
+      res.send(user);
     });
 
     // API to Update a Book
