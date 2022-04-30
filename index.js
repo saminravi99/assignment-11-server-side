@@ -133,7 +133,9 @@ const run = async () => {
 
     app.put("/inventory/:id", async (req, res) => {
       const id = req.params.id;
+      console.log(id);
       const book = req.body;
+      console.log(book);
       const filter = { _id: ObjectId(id) };
       const option = { upsert: true };
       const updateDoc = { $set: {...book} };
