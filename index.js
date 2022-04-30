@@ -68,12 +68,12 @@ const run = async () => {
 
     //API to get all User Info who is posting the book
 
-    app.get("/user", async (req, res) => {
+    app.get("/alluser", async (req, res) => {
       const query = {};
       const user = await userAddItemCollection.find(query).toArray();
       res.send(user);
     });
-    
+
 
     //API to get User Info who is posting the book
 
