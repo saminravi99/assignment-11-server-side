@@ -138,7 +138,7 @@ const run = async () => {
       console.log(book);
       const filter = { _id: ObjectId(id) };
       const option = { upsert: true };
-      const updateDoc = { $set: {...book} };
+      const updateDoc = { $set: book };
       const result = await booksCollection.updateOne(filter, updateDoc, option);
       res.send(result);
     });
