@@ -113,7 +113,7 @@ const run = async () => {
 
     //API to update user info who is posting/updating stock of the book
 
-    app.put("/inventory/:id", async (req, res) => {
+    app.put("/users/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
       const user = req.body;
