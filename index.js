@@ -143,7 +143,7 @@ const run = async () => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       const queryEmail = req.query.email;
-      if (queryEmail === decodedEmail) {
+      if (email === decodedEmail) {
         const query = { email: queryEmail };
         // console.log(query);
         const user = await userAddItemCollection.find(query).toArray();
