@@ -94,6 +94,7 @@ const run = async () => {
       }
     });
 
+    
     //API to post User Info who is posting the book
 
     app.post("/user", verifyJWT, async (req, res) => {
@@ -101,6 +102,7 @@ const run = async () => {
       const email = req.header.email;
       if (email === decodedEmail) {
       const user = req.body;
+      console.log(user);
       await userAddItemCollection.insertOne(user);
       res.send(user);
       } else {
