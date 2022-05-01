@@ -10,7 +10,6 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors());
-// app.use(cors());
 app.use(bodyParser.json());
 
 function verifyJWT(req, res, next) {
@@ -86,14 +85,13 @@ const run = async () => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       if (email === decodedEmail) {
-      const book = req.body;
-      await booksCollection.insertOne(book);
-      res.send(book);
+        const book = req.body;
+        await booksCollection.insertOne(book);
+        res.send(book);
       } else {
         res.send("You are not authorized to add a book");
       }
     });
-
 
     //API to post User Info who is posting the book
 
@@ -101,10 +99,10 @@ const run = async () => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       if (email === decodedEmail) {
-      const user = req.body;
-      console.log(user);
-      await userAddItemCollection.insertOne(user);
-      res.send(user);
+        const user = req.body;
+        console.log(user);
+        await userAddItemCollection.insertOne(user);
+        res.send(user);
       } else {
         res.send("You are not authorized to add a user");
       }
@@ -200,9 +198,9 @@ const run = async () => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       if (email === decodedEmail) {
-      const user = req.body;
-      await userStockUpdateCollection.insertOne(user);
-      res.send(user);
+        const user = req.body;
+        await userStockUpdateCollection.insertOne(user);
+        res.send(user);
       } else {
         res.send("You are not authorized to add a user");
       }
@@ -214,8 +212,8 @@ const run = async () => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       if (email === decodedEmail) {
-      const user = await userStockUpdateCollection.find(query).toArray();
-      res.send(user);
+        const user = await userStockUpdateCollection.find(query).toArray();
+        res.send(user);
       } else {
         res.send("You are not authorized to add a user");
       }
@@ -223,19 +221,23 @@ const run = async () => {
 
     // API to Update a Book
 
-    app.put("/inventory/:id", verifyJWT,async (req, res) => {
+    app.put("/inventory/:id", verifyJWT, async (req, res) => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       if (email === decodedEmail) {
-      const id = req.params.id;
-      console.log(id);
-      const book = req.body;
-      console.log(book);
-      const filter = { _id: ObjectId(id) };
-      const option = { upsert: true };
-      const updateDoc = { $set: book };
-      const result = await booksCollection.updateOne(filter, updateDoc, option);
-      res.send(result);
+        const id = req.params.id;
+        console.log(id);
+        const book = req.body;
+        console.log(book);
+        const filter = { _id: ObjectId(id) };
+        const option = { upsert: true };
+        const updateDoc = { $set: book };
+        const result = await booksCollection.updateOne(
+          filter,
+          updateDoc,
+          option
+        );
+        res.send(result);
       } else {
         res.status(403).send({ message: "Forbidden Access" });
       }
@@ -247,10 +249,10 @@ const run = async () => {
       const decodedEmail = req.decoded.email;
       const email = req.headers.email;
       if (email === decodedEmail) {
-      const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
-      const result = await booksCollection.deleteOne(filter);
-      res.send(result);
+        const id = req.params.id;
+        const filter = { _id: ObjectId(id) };
+        const result = await booksCollection.deleteOne(filter);
+        res.send(result);
       } else {
         res.status(403).send({ message: "Forbidden Access" });
       }
