@@ -94,12 +94,12 @@ const run = async () => {
       }
     });
 
-    
+
     //API to post User Info who is posting the book
 
     app.post("/user", verifyJWT, async (req, res) => {
       const decodedEmail = req.decoded.email;
-      const email = req.header.email;
+      const email = req.headers.email;
       if (email === decodedEmail) {
       const user = req.body;
       console.log(user);
